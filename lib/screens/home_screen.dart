@@ -18,11 +18,134 @@ class _HomePageState extends State<HomePage> {
         decoration: BoxDecoration(color: Color.fromARGB(30, 128, 128, 128)),
         child: Column(
           children: [
-            ElevatedButton(
-                onPressed: () {
-                  DataSources.getForecast('new delhi', 1);
-                },
-                child: Text("Click Me"))
+            Container(
+              margin: const EdgeInsets.symmetric(
+                  horizontal: 10, vertical: 10),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+              height: 160,
+              decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                  borderRadius: BorderRadius.circular(8)),
+              child:
+                  Column(
+                    children: [
+                      Row(
+                        children: const [
+                          Icon(Icons.location_on),
+                          SizedBox(width:10),
+                          Text(
+                            "Delhi",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(width:200),
+                          Icon(Icons.share),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.network(
+                            'https://thumbs.dreamstime.com/z/colorful-clouds-soft-sunset-sky-file-cleaned-retouched-199572539.jpg',
+                            cacheHeight: 100,
+                            cacheWidth: 100,
+                            height: 100,
+                            width: 100,
+                          ),
+                          const SizedBox(
+                            width: 40,
+                          ),
+                          Column(
+                            children: const [
+                               Text(
+                                "26 °C",
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    fontWeight: FontWeight.w900),
+                              ),
+                               Text(
+                                "clear",
+                                style:  TextStyle(fontSize: 20),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(
+                  horizontal: 10, vertical: 10),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+              height: 180,
+              decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                  borderRadius: BorderRadius.circular(8)),
+              child: Column(
+                children:[
+                 Row(
+                   children: const [
+                     Text(
+                       "Crop Name",
+                       style:  TextStyle(fontSize: 20),
+                     ),
+                   ],
+                 ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                     const CircleAvatar(
+                       backgroundImage: NetworkImage('https://thumbs.dreamstime.com/z/colorful-clouds-soft-sunset-sky-file-cleaned-retouched-199572539.jpg'),
+                       radius: 50,
+                     ),
+                      const SizedBox(
+                        width: 40,
+                      ),
+                      Column(
+                        children: const [
+                          Text(
+                            "Duration",
+                            style:  TextStyle(fontSize: 20),
+                          ),
+                          Text(
+                            "Varity",
+                            style:  TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(
+                  horizontal: 10, vertical: 10),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+              height: 180,
+              decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                  borderRadius: BorderRadius.circular(8)),
+              child: Row(
+                children: const [
+                  Text(
+                    "Machine learning card",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
           ],
         ));
   }

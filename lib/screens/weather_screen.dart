@@ -28,13 +28,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   void initState() {
     super.initState();
-    x = "hello";
+    x = "Bye";//Originally it was hello #ChangesMadeByAbeed
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: DataSources.getForecast('Bhopal', 7),
+      future: DataSources.getForecast('Delhi', 7),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasData) {
           ForeCast foreCast = snapshot.data;
@@ -178,8 +178,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 Container(
                     margin: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
-                    // padding:
-                    // const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  //  suraj code from here
                     height: 120,
                     child: ListView.builder(
                       itemCount: 7,
