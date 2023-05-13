@@ -35,7 +35,7 @@ class _WeatherCardState extends State<WeatherCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
-                  children: [
+                  children: const [
                     Icon(Icons.location_on),
                 SizedBox(
                 width: 8

@@ -52,7 +52,7 @@ class _CropsListViewState extends State<CropsListView> {
         color: Colors.black,
         
         child: PagedGridView(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           pagingController: _pagingController,
           builderDelegate: PagedChildBuilderDelegate<CropsData>(
               itemBuilder: (context, item, index) => CropCard(cropsData: item)

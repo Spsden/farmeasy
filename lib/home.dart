@@ -92,6 +92,8 @@ class _HomeState extends State<Home> {
         //   child: drawer.SideDrawer(),
         // ),
         body: PersistentTabView(
+
+
           backgroundColor: Colors.black87,
           context,
           screens: _buildScreens(),
