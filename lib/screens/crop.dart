@@ -1,8 +1,10 @@
+import 'package:farmeasy/fetchers/crops_data_model.dart';
 import 'package:farmeasy/screens/crop_screen.dart';
 import 'package:flutter/material.dart';
 
 class CropDetailsPage extends StatelessWidget {
-  const CropDetailsPage({Key? key}) : super(key: key);
+  final CropsData cropsData;
+  const CropDetailsPage({Key? key, required this.cropsData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

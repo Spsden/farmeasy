@@ -159,8 +159,8 @@ class _CropScreenState extends State<CropScreen> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CropDetailsPage()));
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => CropDetailsPage()));
               },
               child: Container(
                 margin:

@@ -14,7 +14,7 @@ class CropCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CropDetailsPage()));
+              MaterialPageRoute(builder: (context) => CropDetailsPage(cropsData: cropsData,)));
         },
         child: Card(
           elevation: 30,
