@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
                 height: 200,
                 width: 200,
-                child: Lottie.asset('assets/cloud.json'))
+                child: Lottie.asset('assets/sunny.json'))
             // Container(
             //   margin: const EdgeInsets.sy
             //   mmetric(

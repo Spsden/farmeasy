@@ -11,7 +11,8 @@ import 'DataModels/fore_cast/fore_cast.dart';
 
 String requestAuthority = 'https://crops-l107jvl93-devesh-23.vercel.app/';
 
-String weatherKey = 'b82f0e706c1849c39d5140718230903';
+//String weatherKey = 'b82f0e706c1849c39d5140718230903';
+String weatherKey = '97a7732044754cada9d203310231305';
 
 String weatherRequestAuthority = 'https://api.weatherapi.com/v1';
 

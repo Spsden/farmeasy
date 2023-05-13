@@ -19,13 +19,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   late PersistentTabController _persistentTabController;
 
-  List<Widget> _buildScreens() => [
-        HomePage(),
-        CropsListView(),
-       
-        Placeholder(),
-        WeatherScreen()
-      ];
+  List<Widget> _buildScreens() =>
+      [HomePage(), CropsListView(), Placeholder(), WeatherScreen()];
 
   List<PersistentBottomNavBarItem> _navBarsItems() => [
         PersistentBottomNavBarItem(
@@ -35,8 +30,8 @@ class _HomeState extends State<Home> {
             inactiveColorPrimary: Colors.grey,
             inactiveColorSecondary: Colors.purple),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.search),
-          title: "Search",
+          icon: const Icon(Icons.grass),
+          title: "Crops",
           activeColorPrimary: Colors.teal,
           inactiveColorPrimary: Colors.grey,
           routeAndNavigatorSettings: RouteAndNavigatorSettings(
@@ -47,7 +42,6 @@ class _HomeState extends State<Home> {
             },
           ),
         ),
-  
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.message),
           title: "Messages",
@@ -62,8 +56,8 @@ class _HomeState extends State<Home> {
           ),
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.settings),
-          title: "Settings",
+          icon: const Icon(Icons.cloud),
+          title: "Weather",
           activeColorPrimary: Colors.indigo,
           inactiveColorPrimary: Colors.grey,
           routeAndNavigatorSettings: RouteAndNavigatorSettings(
@@ -92,9 +86,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
+        // appBar: AppBar(),
         drawer: const Drawer(
-          child:drawer.SideDrawer(),
+          child: drawer.SideDrawer(),
         ),
         body: PersistentTabView(
           context,

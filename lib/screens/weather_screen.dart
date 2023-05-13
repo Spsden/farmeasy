@@ -6,8 +6,10 @@ import 'package:farmeasy/custom/hourly_cell.dart';
 import 'package:farmeasy/fetchers/DataModels/fore_cast/hour.dart';
 import 'package:farmeasy/fetchers/fetchers.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../fetchers/DataModels/fore_cast/fore_cast.dart';
+import '../models/helpers.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -35,8 +37,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
   String dayFromDateCalc(String currDate) {
     final splitted = currDate.split('-');
-    // List<int> monthArray = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 ];
-
 
     Map<int, int> monthMap = {
       1: 3,
@@ -76,15 +76,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
     int absVal = (monthMap[month]! - day).abs();
     ans = (ans + absVal) % 7;
-    //print(ans)
 
     return dayMap[ans] ?? 'na';
-
-
-    //num ycode = (lastTwoOfYear + (lastTwoOfYear / 4)) % 7;
-
-
-    //return "Hallelulayah";
   }
 
   @override
@@ -94,6 +87,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasData) {
           ForeCast foreCast = snapshot.data;
+          String forecastCondition =
+              foreCast.current?.condition?.text.toString() ??
+                  'assets/cloud.json';
+          print(weatherAnimation['Sunny']);
           return ListView(
             physics: const BouncingScrollPhysics(),
             children: [
@@ -107,12 +104,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     margin: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
                     padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
                     height: 180,
                     decoration: BoxDecoration(
-                        color: Theme
-                            .of(context)
-                            .cardColor,
+                        color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(8)),
                     child: Column(
                       children: [
@@ -138,18 +133,17 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.network(
-                                'https://thumbs.dreamstime.com/z/colorful-clouds-soft-sunset-sky-file-cleaned-retouched-199572539.jpg',
-                                cacheHeight: 100,
-                                cacheWidth: 100,
-                                height: 100,
+                              SizedBox(
                                 width: 100,
+                                height: 100,
+                                child: Lottie.asset(
+                                  weatherAnimation[forecastCondition]!,
+                                ),
                               ),
                               Column(
                                 children: [
                                   Text(
-                                    '${foreCast.current!.tempC
-                                        .toString()} °C' ??
+                                    '${foreCast.current!.tempC.toString()} °C' ??
                                         'NA',
                                     style: const TextStyle(
                                         fontSize: 35,
@@ -170,9 +164,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
               // const WeatherCard(),
               Container(
                 margin:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 padding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                 height: 160,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -211,7 +205,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             const Icon(Icons.cloud),
                             ' Rain',
                             foreCast.forecast?[0].day!.dailyChanceOfRain
-                                .toString() ??
+                                    .toString() ??
                                 'NA'),
                         dataCell(
                             context,
@@ -238,7 +232,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     margin: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
                     padding:
-                    const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
                     //  suraj code from here
                     height: 120,
                     child: ListView.builder(
@@ -253,7 +247,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         return Container(
                             margin: const EdgeInsets.symmetric(horizontal: 5),
                             child: HourlyCell(
-                              icon: weatherIcon[wIcon] ?? Icon(Icons.cloudy_snowing),
+                              icon: weatherIcon[wIcon] ??
+                                  const Icon(Icons.cloudy_snowing),
                               temp: hour.tempC.toString(),
                               time: hour.time.toString(),
                             ));
@@ -262,9 +257,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 Column(
                   children: [
                     const Text(
-                      "3 Days Forecast",
+                      "10 Days Forecast",
                       style:
-                      TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                     ),
                     Container(
                         margin: const EdgeInsets.symmetric(
@@ -280,22 +275,28 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
                             final String date =
-                            foreCast.forecast![index].date.toString();
+                                foreCast.forecast![index].date.toString();
                             String day = dayFromDateCalc(date);
 
                             final String temp = foreCast
-                                .forecast![index].day!.avgtempC
-                                .toString() ??
+                                    .forecast![index].day!.avgtempC
+                                    .toString() ??
                                 'NA';
 
-                            final String iconType = foreCast.forecast![index].day!.condition!.text.toString();
+                             String iconType = foreCast
+                                .forecast![index].day!.condition!.text
+                                .toString();
+
+                            if(!weatherIcon.containsKey(iconType)){
+                              iconType = "Rainy";
+                            }
+
+                            //List<String> iconTypes = ["Sunny","Partly cloudy","Cloudy","Clear"]
 
                             return Container(
                                 margin: const EdgeInsets.symmetric(vertical: 5),
                                 child: DaysCell(
-                                    day: day,
-                                    icon: iconType,
-                                    temp: temp));
+                                    day: day, icon: iconType, temp: temp));
                           },
                         ))
                   ],
@@ -309,9 +310,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
           return const Placeholder();
         } else {
           return const SizedBox(
-              width: 200,
-              height: 200,
-              child: CircularProgressIndicator());
+              width: 200, height: 200, child: CircularProgressIndicator());
         }
       },
     );
@@ -320,23 +319,17 @@ class _WeatherScreenState extends State<WeatherScreen> {
   Widget dataCell(BuildContext context, Icon icon, String name, String data) {
     return
 
-      //   SizedBox(
-      //   width: MediaQuery.of(context).size.width/2.4,
-      //   height: 20,
-      //
-      //   child: ListTile(title: Text(name), leading: icon),
-      //
-      // );
 
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [icon, Text(name)],
-          ),
-          Text(data)
-        ],
-      );
+
+        Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [icon, Text(name)],
+        ),
+        Text(data)
+      ],
+    );
   }
 }

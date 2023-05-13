@@ -2,14 +2,9 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
-const Map<String, Icon> weatherIcon = {
-  "Sunny": Icon(Icons.sunny),
-  "Partly cloudy": Icon(Icons.wb_cloudy),
-  "Rainy": Icon(Icons.cloudy_snowing),
-  "Cloudy": Icon(Icons.wb_cloudy_sharp),
-  "Clear": Icon(Icons.cloud),
-  "Heavy rain": Icon(Icons.cloudy_snowing),
-};
+import '../models/helpers.dart';
+
+
 
 class DaysCell extends StatelessWidget {
   final String day;
