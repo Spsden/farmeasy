@@ -17,7 +17,7 @@ class DaysCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(icon);
+   // print(icon);
     return Container(
       height: 80,
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -28,18 +28,35 @@ class DaysCell extends StatelessWidget {
       //MediaQuery.of(context).size.height/6,
       //width: MediaQuery.of(context).size.width,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+       // mainAxisAlignment: MainAxisAlignment.,
         children: [
-          Text(
-            day,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          SizedBox(
+           // width: MediaQuery.of(context).size.width*3/5,
+            child: Text(
+
+              day,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.white),
+            ),
           ),
-          Container(
-            child: weatherIcon[icon],
+          const Spacer(),
+          SizedBox(
+            child: Container(
+              child: weatherIcon[icon],
+            ),
           ),
-          Text(
-            temp,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          SizedBox(
+            width: 40,
+          ),
+
+          SizedBox(
+
+            width: 50,
+
+
+            child: Text(
+              temp,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.white),
+            ),
           ),
         ],
       ),

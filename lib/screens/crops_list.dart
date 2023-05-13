@@ -48,35 +48,38 @@ class _CropsListViewState extends State<CropsListView> {
       // Don't worry about displaying progress or error indicators on screen; the
       // package takes care of that. If you want to customize them, use the
       // [PagedChildBuilderDelegate] properties.
-      PagedGridView(
-        pagingController: _pagingController,
-        builderDelegate: PagedChildBuilderDelegate<CropsData>(
-            itemBuilder: (context, item, index) => CropCard(cropsData: item)
+      Material(
+        color: Colors.black,
+        
+        child: PagedGridView(
+          padding: EdgeInsets.all(10),
+          pagingController: _pagingController,
+          builderDelegate: PagedChildBuilderDelegate<CropsData>(
+              itemBuilder: (context, item, index) => CropCard(cropsData: item)
 
-            // ListTile(
-            //   onTap: () {
-            //     // Navigator.push(context, MaterialPageRoute(builder: (context) => CropDetailsPage()));
-            //   },
-            //   leading: CircleAvatar(
-            //     child: CachedNetworkImage(
-            //       filterQuality: FilterQuality.medium,
-            //       imageUrl: item.thumbnailUrl ??
-            //           "https://i.imgur.com/3jcYAZR.jpg",
-            //       progressIndicatorBuilder:
-            //           (context, url, downloadProgress) =>
-            //               CircularProgressIndicator(
-            //                   value: downloadProgress.progress),
-            //       errorWidget: (context, url, error) => Icon(Icons.error),
-            //     ),
-            //   ),
-            //   title: Text(item.name ?? "na"),
-            // )
+              // ListTile(
+              //   onTap: () {
+              //     // Navigator.push(context, MaterialPageRoute(builder: (context) => CropDetailsPage()));
+              //   },
+              //   leading: CircleAvatar(
+              //     child: CachedNetworkImage(
+              //       filterQuality: FilterQuality.medium,
+              //       imageUrl: item.thumbnailUrl ??
+              //           "https://i.imgur.com/3jcYAZR.jpg",
+              //       progressIndicatorBuilder:
+              //           (context, url, downloadProgress) =>
+              //               CircularProgressIndicator(
+              //                   value: downloadProgress.progress),
+              //       errorWidget: (context, url, error) => Icon(Icons.error),
+              //     ),
+              //   ),
+              //   title: Text(item.name ?? "na"),
+              // )
 
-            ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 9/12,
-
-            crossAxisCount: 2, mainAxisSpacing: 16),
+              ),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 9 / 12, crossAxisCount: 2, mainAxisSpacing: 16),
+        ),
       );
 
   @override

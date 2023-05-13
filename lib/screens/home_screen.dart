@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(color: Color.fromARGB(30, 128, 128, 128)),
+        decoration: const BoxDecoration(color: Colors.black),
         child: Column(
           children: [
             Container(

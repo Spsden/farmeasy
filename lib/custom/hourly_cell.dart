@@ -21,14 +21,14 @@ class HourlyCell extends StatelessWidget {
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           time,
-          style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold,color: Colors.white),
         ),
         Container(
           child: icon,
         ),
         Text(
           temp,
-          style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold,color: Colors.white),
         ),
       ]),
     );

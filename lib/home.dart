@@ -86,11 +86,13 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        //backgroundColor: Theme.of(context).backgroundColor,
         // appBar: AppBar(),
-        drawer: const Drawer(
-          child: drawer.SideDrawer(),
-        ),
+        // drawer: const Drawer(
+        //   child: drawer.SideDrawer(),
+        // ),
         body: PersistentTabView(
+          backgroundColor: Colors.black87,
           context,
           screens: _buildScreens(),
           items: _navBarsItems(),

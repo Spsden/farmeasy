@@ -1,5 +1,6 @@
 import 'package:farmeasy/home.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,10 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
-        cardColor: Colors.blue.withOpacity(0.4)
+        cardColor: HexColor('#0D47A1').withOpacity(0.4),
+
+
+
 
       ),
       home: const Home(),

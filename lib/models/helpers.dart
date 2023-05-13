@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 const Map<String, Icon> weatherIcon = {
-  "Sunny": Icon(Icons.sunny),
-  "Partly cloudy": Icon(Icons.wb_cloudy),
-  "Rainy": Icon(Icons.cloudy_snowing),
-  "Cloudy": Icon(Icons.wb_cloudy_sharp),
-  "Clear": Icon(Icons.light_mode),
-  "Heavy rain": Icon(Icons.cloudy_snowing),
-  "Moderate or heavy rain with thunder"  : Icon(Icons.thunderstorm)
+  "Sunny": Icon(Icons.sunny,size: 50,color: Colors.white),
+  "Partly cloudy": Icon(Icons.wb_cloudy,size: 50,color: Colors.white),
+  "Rainy": Icon(Icons.cloudy_snowing,size: 50,color: Colors.white),
+  "Cloudy": Icon(Icons.wb_cloudy_sharp,size: 50,color: Colors.white),
+  "Clear": Icon(Icons.light_mode,size: 50,color: Colors.white),
+  "Heavy rain": Icon(Icons.cloudy_snowing,size: 50,color: Colors.white),
+  "Moderate or heavy rain with thunder"  : Icon(Icons.thunderstorm,color: Colors.white)
 };
 const Map<String, String> weatherAnimation = {
   "Sunny": "assets/sunny.json",

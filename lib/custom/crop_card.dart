@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:farmeasy/fetchers/crops_data_model.dart';
 import 'package:farmeasy/screens/crop.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class CropCard extends StatelessWidget {
   final CropsData cropsData;
@@ -17,8 +18,10 @@ class CropCard extends StatelessWidget {
               MaterialPageRoute(builder: (context) => CropDetailsPage(cropsData: cropsData,)));
         },
         child: Card(
-          elevation: 30,
-          shadowColor: Colors.black,
+          elevation: 50,
+          color: Theme.of(context).cardColor,
+
+          borderOnForeground: true,
           //color: Colors.greenAccent[100],
           child: SizedBox(
             width: 200,
@@ -28,7 +31,7 @@ class CropCard extends StatelessWidget {
               child: Column(
                 children: [
                   CachedNetworkImage(
-                    height: 150,
+                    height: 140,
                     fit: BoxFit.fill,
                     width: 200,
                     // filterQuality: FilterQuality.medium,
@@ -43,13 +46,13 @@ class CropCard extends StatelessWidget {
                         const Icon(Icons.error),
                   ),
                   const SizedBox(
-                    height: 6,
+                    height: 4,
                   ), //SizedBox
                   Text(
                     cropsData.name,
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.green[900],
+                      color: Colors.white,
                       fontWeight: FontWeight.w500,
                     ), //Textstyle
                   ), //Text
