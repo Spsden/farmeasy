@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                   horizontal: 10, vertical: 10),
               padding:
               const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-              height: 180,
+              height: 160,
               decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(8)),
@@ -107,6 +107,7 @@ class _HomePageState extends State<HomePage> {
                      const CircleAvatar(
                        backgroundImage: NetworkImage('https://thumbs.dreamstime.com/z/colorful-clouds-soft-sunset-sky-file-cleaned-retouched-199572539.jpg'),
                        radius: 50,
+                       //give here the crop image
                      ),
                       const SizedBox(
                         width: 40,
@@ -137,14 +138,46 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(8)),
-              child: Row(
-                children: const [
-                  Text(
-                    "Machine learning card",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  )
+              child: Column(
+                children: [
+                  Row(
+                    children: const [
+                      Text(
+                        "Machine Learning Card",
+                        style:  TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const CircleAvatar(
+                        backgroundImage: NetworkImage('https://thumbs.dreamstime.com/z/colorful-clouds-soft-sunset-sky-file-cleaned-retouched-199572539.jpg'),
+                        radius: 50,
+                        //give here the image for machine learning
+                      ),
+                      const SizedBox(
+                        width: 40,
+                      ),
+                      Column(
+                        children: const [
+                          Text(
+                            "Healthy percentage",
+                            style:  TextStyle(fontSize: 20),
+                          ),
+                          Text(
+                            "Defect in plant",
+                            style:  TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ],
-              ),
+              )
             ),
           ],
         ));
