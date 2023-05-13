@@ -6,8 +6,10 @@ class CropDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("Lollllll", style: TextStyle(color: Colors.white),),
+    return Material(
+      child: Container(
+        child: Text("Lollllll", style: TextStyle(color: Colors.white),),
+      ),
     );
   }
 }

@@ -53,10 +53,12 @@ class DataSources {
 
         ForeCast foreCast = ForeCast(
             current: current, forecast: lol, location: location);
-        print(lol);
+        print(foreCast.forecast?[0].hour?.length);
         //List<Forecastday> forecastday = responseJson['forecast']['forecastday'].map((e) => );
         //forecast.Forecast forecast = forecast.Forecast.
         //ForeCast foreCast = ForeCast.fromJson(responseJson);
+
+
 
         return foreCast;
         print(location.name);

@@ -183,12 +183,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   //  suraj code from here
                     height: 120,
                     child: ListView.builder(
-                      itemCount: 7,
+                      itemCount: foreCast.forecast?[0].hour?.length,
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
-                        Hour hour = foreCast.forecast![index].hour![index];
+                        Hour hour = foreCast.forecast![0].hour![index];
 
                         return Container(
                             margin: const EdgeInsets.symmetric(horizontal: 5),
