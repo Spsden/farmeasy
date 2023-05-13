@@ -3,6 +3,7 @@ import 'package:farmeasy/fetchers/fetchers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -75,110 +76,123 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ],
+
                   ),
 
 
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(
-                  horizontal: 10, vertical: 10),
-              padding:
-              const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-              height: 160,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(8)),
-              child: Column(
-                children:[
-                 Row(
-                   children: const [
-                     Text(
-                       "Crop Name",
-                       style:  TextStyle(fontSize: 20),
-                     ),
-                   ],
-                 ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                     const CircleAvatar(
-                       backgroundImage: NetworkImage('https://thumbs.dreamstime.com/z/colorful-clouds-soft-sunset-sky-file-cleaned-retouched-199572539.jpg'),
-                       radius: 50,
-                       //give here the crop image
-                     ),
-                      const SizedBox(
-                        width: 40,
-                      ),
-                      Column(
-                        children: const [
-                          Text(
-                            "Duration",
-                            style:  TextStyle(fontSize: 20),
-                          ),
-                          Text(
-                            "Varity",
-                            style:  TextStyle(fontSize: 20),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(
-                  horizontal: 10, vertical: 10),
-              padding:
-              const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-              height: 180,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(8)),
-              child: Column(
-                children: [
-                  Row(
-                    children: const [
-                      Text(
-                        "Machine Learning Card",
-                        style:  TextStyle(fontSize: 20),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const CircleAvatar(
-                        backgroundImage: NetworkImage('https://thumbs.dreamstime.com/z/colorful-clouds-soft-sunset-sky-file-cleaned-retouched-199572539.jpg'),
-                        radius: 50,
-                        //give here the image for machine learning
-                      ),
-                      const SizedBox(
-                        width: 40,
-                      ),
-                      Column(
-                        children: const [
-                          Text(
-                            "Healthy percentage",
-                            style:  TextStyle(fontSize: 20),
-                          ),
-                          Text(
-                            "Defect in plant",
-                            style:  TextStyle(fontSize: 20),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ],
-              )
-            ),
+
+            SizedBox(
+                height: 200,
+                width: 200,
+                child: Lottie.asset('assets/cloud.json'))
+            // Container(
+            //   margin: const EdgeInsets.sy
+            //   mmetric(
+            //       horizontal: 10, vertical: 10),
+            //   padding:
+            //   const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+            //   height: 160,
+            //   decoration: BoxDecoration(
+            //       color: Theme.of(context).cardColor,
+            //       borderRadius: BorderRadius.circular(8)),
+            //   child: Column(
+            //     children:[
+            //      Row(
+            //        children: const [
+            //          Text(
+            //            "Crop Name",
+            //            style:  TextStyle(fontSize: 20),
+            //          ),
+            //        ],
+            //      ),
+            //       const SizedBox(
+            //         height: 12,
+            //       ),
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         children: [
+            //          const CircleAvatar(
+            //            backgroundImage: NetworkImage('https://thumbs.dreamstime.com/z/colorful-clouds-soft-sunset-sky-file-cleaned-retouched-199572539.jpg'),
+            //            radius: 50,
+            //            //give here the crop image
+            //          ),
+            //           const SizedBox(
+            //             width: 40,
+            //           ),
+            //           Column(
+            //             children: const [
+            //               Text(
+            //                 "Duration",
+            //                 style:  TextStyle(fontSize: 20),
+            //               ),
+            //               Text(
+            //                 "Varity",
+            //                 style:  TextStyle(fontSize: 20),
+            //               ),
+            //             ],
+            //           )
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // Container(
+            //   margin: const EdgeInsets.symmetric(
+            //       horizontal: 10, vertical: 10),
+            //   padding:
+            //   const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+            //   height: 180,
+            //   decoration: BoxDecoration(
+            //       color: Theme.of(context).cardColor,
+            //       borderRadius: BorderRadius.circular(8)),
+            //   child: Column(
+            //     children: [
+            //       Row(
+            //         children: const [
+            //           Text(
+            //             "Machine Learning Card",
+            //             style:  TextStyle(fontSize: 20),
+            //           )
+            //         ],
+            //       ),
+            //       const SizedBox(
+            //         height: 12,
+            //       ),
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         children: [
+            //           const CircleAvatar(
+            //             backgroundImage: NetworkImage('https://thumbs.dreamstime.com/z/colorful-clouds-soft-sunset-sky-file-cleaned-retouched-199572539.jpg'),
+            //             radius: 50,
+            //             //give here the image for machine learning
+            //           ),
+            //           const SizedBox(
+            //             width: 40,
+            //           ),
+            //           Column(
+            //             children:  [
+            //               Text(
+            //                 "Healthy percentage",
+            //                 style:  TextStyle(fontSize: 20),
+            //               ),
+            //               Text(
+            //                 "Defect in plant",
+            //                 style:  TextStyle(fontSize: 20),
+            //               ),
+            //
+            //
+            //
+            //             ],
+            //           )
+            //
+            //
+            //         ],
+            //       ),
+            //
+            //     ],
+            //   )
+            // ),
           ],
         ));
   }

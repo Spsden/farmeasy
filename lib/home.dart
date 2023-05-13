@@ -93,7 +93,7 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(),
-        drawer: Drawer(
+        drawer: const Drawer(
           child:drawer.SideDrawer(),
         ),
         body: PersistentTabView(

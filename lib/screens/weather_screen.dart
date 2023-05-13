@@ -248,11 +248,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
                         Hour hour = foreCast.forecast![0].hour![index];
+                        String wIcon = hour.condition?.text ?? 'Rainy';
 
                         return Container(
                             margin: const EdgeInsets.symmetric(horizontal: 5),
                             child: HourlyCell(
-                              icon: const Icon(Icons.sunny),
+                              icon: weatherIcon[wIcon] ?? Icon(Icons.cloudy_snowing),
                               temp: hour.tempC.toString(),
                               time: hour.time.toString(),
                             ));
@@ -286,11 +287,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                 .forecast![index].day!.avgtempC
                                 .toString() ??
                                 'NA';
+
+                            final String iconType = foreCast.forecast![index].day!.condition!.text.toString();
+
                             return Container(
                                 margin: const EdgeInsets.symmetric(vertical: 5),
                                 child: DaysCell(
                                     day: day,
-                                    icon: const Icon(Icons.sunny),
+                                    icon: iconType,
                                     temp: temp));
                           },
                         ))
