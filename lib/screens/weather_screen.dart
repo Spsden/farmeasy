@@ -84,7 +84,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
     //num ycode = (lastTwoOfYear + (lastTwoOfYear / 4)) % 7;
 
 
-    return "Hallelulayah";
+    //return "Hallelulayah";
   }
 
   @override
@@ -238,7 +238,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     margin: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
                     padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
                     //  suraj code from here
                     height: 120,
                     child: ListView.builder(
@@ -261,7 +261,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 Column(
                   children: [
                     const Text(
-                      "10 Days Forecast",
+                      "3 Days Forecast",
                       style:
                       TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                     ),

@@ -3,19 +3,20 @@ import 'dart:convert';
 import 'package:farmeasy/fetchers/DataModels/fore_cast/current.dart';
 import 'package:farmeasy/fetchers/DataModels/fore_cast/forecastday.dart';
 import 'package:farmeasy/fetchers/DataModels/fore_cast/location.dart';
+import 'package:farmeasy/fetchers/crops_data_model.dart';
 import 'package:farmeasy/models/crop_model.dart';
 import 'package:http/http.dart';
 import 'package:farmeasy/fetchers/DataModels/fore_cast/forecast.dart' as forecast;
 import 'DataModels/fore_cast/fore_cast.dart';
 
-String requestAuthority = 'https://crops-api-1pn2.vercel.app';
+String requestAuthority = 'https://crops-l107jvl93-devesh-23.vercel.app/';
 
 String weatherKey = 'b82f0e706c1849c39d5140718230903';
 
 String weatherRequestAuthority = 'https://api.weatherapi.com/v1';
 
 class DataSources {
-  static Future allresults(int pageNum) async {
+  static Future allResults() async {
     final Response response = await get(Uri.parse('$requestAuthority/all'));
 
     try {
@@ -34,10 +35,33 @@ class DataSources {
     }
   }
 
+  static Future fetchCrops(String pageNum) async {
+    final Response response = await get(Uri.parse('https://www.growstuff.org/crops?page=$pageNum&format=json'));
+
+    try {
+      if (response.statusCode == 200) {
+       // print(response.body);
+
+        List<CropsData> list = cropsDataFromMap(response.body);
+        // print(response.body.runtimeType);
+
+       // list.forEach((element) {print(element.name);});
+
+       // print(list.first.name);
+        return list;
+      } else {
+        // print(response.statusCode);
+        print("error");
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   static Future getForecast(String location, int days) async {
     //print(location);
     final Response response = await get(Uri.parse(
-        '$weatherRequestAuthority/forecast.json?key=$weatherKey&q=$location&days=$days'));
+        '$weatherRequestAuthority/forecast.json?key=$weatherKey&q=$location&days=7'));
 
     try {
       if (response.statusCode == 200) {
@@ -53,7 +77,7 @@ class DataSources {
 
         ForeCast foreCast = ForeCast(
             current: current, forecast: lol, location: location);
-        print(foreCast.forecast?[0].hour?.length);
+        print(foreCast.forecast!.length);
         //List<Forecastday> forecastday = responseJson['forecast']['forecastday'].map((e) => );
         //forecast.Forecast forecast = forecast.Forecast.
         //ForeCast foreCast = ForeCast.fromJson(responseJson);

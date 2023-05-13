@@ -15,7 +15,7 @@ class CropData {
         required this.field5,
     });
 
-    String id;
+    int id;
     String crop;
     String variety;
     String seasonDurationInDays;
@@ -28,7 +28,7 @@ class CropData {
         variety: json["Variety"],
         seasonDurationInDays: json["Season_duration_in_days"],
         recommendedZone: json["Recommended_Zone"],
-        field5: json["field5"],
+        field5: json["Crop-image"],
     );
 
     Map<String, dynamic> toJson() => {

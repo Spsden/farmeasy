@@ -1,11 +1,13 @@
 import 'package:farmeasy/custom/drawer.dart';
 import 'package:farmeasy/screens/crop_screen.dart';
+import 'package:farmeasy/screens/crops_list.dart';
 import 'package:farmeasy/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:farmeasy/custom/drawer.dart' as drawer;
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:farmeasy/screens/weather_screen.dart';
+import 'package:farmeasy/screens/crop_search.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,7 +21,7 @@ class _HomeState extends State<Home> {
 
   List<Widget> _buildScreens() => [
         HomePage(),
-        CropScreen(),
+        CropsListView(),
        
         Placeholder(),
         WeatherScreen()

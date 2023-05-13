@@ -134,7 +134,7 @@ class _CropScreenState extends State<CropScreen> {
                       Column(
                         children: const [
                           Text(
-                            "Varity",
+                            "Variety",
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold),
                           ),
@@ -231,29 +231,5 @@ class _CropScreenState extends State<CropScreen> {
     );
   }
 
-// return Center(
-//     child: FutureBuilder(
-//   future: DataSources.allresults(0),
-//   builder: (context, snapshot) {
-//    // print(snapshot.data);
-//     if (snapshot.hasData) {
-//       return ListView.builder(
-//           itemCount: snapshot.data.length,
-//           itemBuilder: ((context, index) {
-//             return ListTile(
-//               leading: CircleAvatar(child: Image.network('https://i.imgur.com/plmUTE7.jpg')),
-//               hoverColor: Colors.white12,
-//               title: Text(snapshot.data[index].crop),
-//               subtitle: Text(snapshot.data[index].variety),
-//             );
-//           }));
-//     }
-//
-//     if (snapshot.hasError) {
-//       return Text(snapshot.error.toString());
-//     } else {
-//       return const CircularProgressIndicator();
-//     }
-//   },
-// ));
+
 }
