@@ -54,7 +54,7 @@ class DataSources {
         print("error");
       }
     } catch (e) {
-      print(e.toString());
+     rethrow;
     }
   }
 

@@ -304,10 +304,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
         if (snapshot.hasError) {
           return const Placeholder();
         } else {
-          return SizedBox(
+          return const SizedBox(
               width: 200,
               height: 200,
-              child: const CircularProgressIndicator());
+              child: CircularProgressIndicator());
         }
       },
     );

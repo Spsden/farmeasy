@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:farmeasy/custom/crop_card.dart';
 import 'package:farmeasy/fetchers/crops_data_model.dart';
 import 'package:farmeasy/fetchers/fetchers.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,7 @@ class CropsListView extends StatefulWidget {
 }
 
 class _CropsListViewState extends State<CropsListView> {
-  static const _pageSize = 100;
+  //static const _pageSize = 100;
 
   final PagingController<int, CropsData> _pagingController =
       PagingController(firstPageKey: 0);
@@ -25,13 +27,16 @@ class _CropsListViewState extends State<CropsListView> {
   Future<void> _fetchPage(int pageKey) async {
     try {
       final newItems = await DataSources.fetchCrops(pageKey.toString());
-      print(newItems);
-      final isLastPage = newItems.length < _pageSize;
+      print(newItems.length);
+      final isLastPage = newItems.length < 20;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems);
+        print("thhe end");
       } else {
-        final nextPageKey = pageKey + newItems.length;
-        _pagingController.appendPage(newItems, nextPageKey as int?);
+        int nextPageKey = pageKey + 1;
+        print(nextPageKey);
+        print(nextPageKey.runtimeType);
+        _pagingController.appendPage(newItems, nextPageKey);
       }
     } catch (error) {
       _pagingController.error = error;
@@ -43,19 +48,36 @@ class _CropsListViewState extends State<CropsListView> {
       // Don't worry about displaying progress or error indicators on screen; the
       // package takes care of that. If you want to customize them, use the
       // [PagedChildBuilderDelegate] properties.
-      PagedListView<int, CropsData>(
-          pagingController: _pagingController,
-          builderDelegate: PagedChildBuilderDelegate<CropsData>(
-              itemBuilder: (context, item, index) => ListTile(
-                    onTap: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => CropDetailsPage()));
-                    },
-                    leading: CircleAvatar(
-                      child: Image.network(item.thumbnailUrl ??
-                          'https://i.imgur.com/3jcYAZR.jpg'),
-                    ),
-                    title: Text(item.name ?? "na"),
-                  )));
+      PagedGridView(
+        pagingController: _pagingController,
+        builderDelegate: PagedChildBuilderDelegate<CropsData>(
+            itemBuilder: (context, item, index) => CropCard(cropsData: item)
+
+            // ListTile(
+            //   onTap: () {
+            //     // Navigator.push(context, MaterialPageRoute(builder: (context) => CropDetailsPage()));
+            //   },
+            //   leading: CircleAvatar(
+            //     child: CachedNetworkImage(
+            //       filterQuality: FilterQuality.medium,
+            //       imageUrl: item.thumbnailUrl ??
+            //           "https://i.imgur.com/3jcYAZR.jpg",
+            //       progressIndicatorBuilder:
+            //           (context, url, downloadProgress) =>
+            //               CircularProgressIndicator(
+            //                   value: downloadProgress.progress),
+            //       errorWidget: (context, url, error) => Icon(Icons.error),
+            //     ),
+            //   ),
+            //   title: Text(item.name ?? "na"),
+            // )
+
+            ),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: 9/12,
+
+            crossAxisCount: 2, mainAxisSpacing: 16),
+      );
 
   @override
   void dispose() {
