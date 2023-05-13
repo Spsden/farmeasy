@@ -99,6 +99,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
               children: [
                 const Text(
                   "  Weather Forecast",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -281,7 +282,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "   10 Days Forecast",
+                        "   7 Days Forecast",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 23,
                             fontWeight: FontWeight.bold,
