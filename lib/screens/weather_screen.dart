@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:farmeasy/custom/days_cell.dart';
 import 'package:farmeasy/custom/days_cell.dart';
 import 'package:farmeasy/custom/hourly_cell.dart';
@@ -28,7 +30,61 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   void initState() {
     super.initState();
-    x = "Bye";//Originally it was hello #ChangesMadeByAbeed
+    x = "Bye"; //Originally it was hello #ChangesMadeByAbeed
+  }
+
+  String dayFromDateCalc(String currDate) {
+    final splitted = currDate.split('-');
+    // List<int> monthArray = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 ];
+
+
+    Map<int, int> monthMap = {
+      1: 3,
+      2: 28,
+      3: 14,
+      4: 4,
+      5: 9,
+      6: 6,
+      7: 11,
+      8: 8,
+      9: 5,
+      10: 10,
+      11: 7,
+      12: 12,
+    };
+
+    Map<int, String> dayMap = {
+      0: "Sunday",
+      1: "Monday",
+      2: "Tuesday",
+      3: "Wednesday",
+      4: "Thursday",
+      5: "Friday",
+      6: "Saturday"
+    };
+
+    List<int> everyDay = splitted.map(int.parse).toList();
+    int yearEnd = int.parse((everyDay[0] / 100).toString().split('.')[1]);
+    int month = everyDay[1];
+    int day = everyDay[2];
+    int centCode = 2;
+    int a = yearEnd ~/ 12;
+    int b = yearEnd % 12;
+    int c = b ~/ 4;
+
+    int ans = (a + b + c + centCode) % 7;
+
+    int absVal = (monthMap[month]! - day).abs();
+    ans = (ans + absVal) % 7;
+    //print(ans)
+
+    return dayMap[ans] ?? 'na';
+
+
+    //num ycode = (lastTwoOfYear + (lastTwoOfYear / 4)) % 7;
+
+
+    return "Hallelulayah";
   }
 
   @override
@@ -51,10 +107,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     margin: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
                     height: 180,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
+                        color: Theme
+                            .of(context)
+                            .cardColor,
                         borderRadius: BorderRadius.circular(8)),
                     child: Column(
                       children: [
@@ -90,7 +148,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               Column(
                                 children: [
                                   Text(
-                                    '${foreCast.current!.tempC.toString()} °C' ??
+                                    '${foreCast.current!.tempC
+                                        .toString()} °C' ??
                                         'NA',
                                     style: const TextStyle(
                                         fontSize: 35,
@@ -111,9 +170,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
               // const WeatherCard(),
               Container(
                 margin:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                 height: 160,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -152,7 +211,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             const Icon(Icons.cloud),
                             ' Rain',
                             foreCast.forecast?[0].day!.dailyChanceOfRain
-                                    .toString() ??
+                                .toString() ??
                                 'NA'),
                         dataCell(
                             context,
@@ -180,7 +239,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         horizontal: 10, vertical: 10),
                     padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                  //  suraj code from here
+                    //  suraj code from here
                     height: 120,
                     child: ListView.builder(
                       itemCount: foreCast.forecast?[0].hour?.length,
@@ -204,7 +263,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     const Text(
                       "10 Days Forecast",
                       style:
-                          TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                     ),
                     Container(
                         margin: const EdgeInsets.symmetric(
@@ -220,15 +279,17 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
                             final String date =
-                                foreCast.forecast![index].date.toString();
+                            foreCast.forecast![index].date.toString();
+                            String day = dayFromDateCalc(date);
+
                             final String temp = foreCast
-                                    .forecast![index].day!.avgtempC
-                                    .toString() ??
+                                .forecast![index].day!.avgtempC
+                                .toString() ??
                                 'NA';
                             return Container(
                                 margin: const EdgeInsets.symmetric(vertical: 5),
                                 child: DaysCell(
-                                    day: date,
+                                    day: day,
                                     icon: const Icon(Icons.sunny),
                                     temp: temp));
                           },
@@ -255,23 +316,23 @@ class _WeatherScreenState extends State<WeatherScreen> {
   Widget dataCell(BuildContext context, Icon icon, String name, String data) {
     return
 
-        //   SizedBox(
-        //   width: MediaQuery.of(context).size.width/2.4,
-        //   height: 20,
-        //
-        //   child: ListTile(title: Text(name), leading: icon),
-        //
-        // );
+      //   SizedBox(
+      //   width: MediaQuery.of(context).size.width/2.4,
+      //   height: 20,
+      //
+      //   child: ListTile(title: Text(name), leading: icon),
+      //
+      // );
 
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [icon, Text(name)],
-        ),
-        Text(data)
-      ],
-    );
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [icon, Text(name)],
+          ),
+          Text(data)
+        ],
+      );
   }
 }
