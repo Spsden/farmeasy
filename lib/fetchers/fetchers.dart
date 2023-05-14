@@ -60,8 +60,8 @@ class DataSources {
 
       if (response.statusCode == 200) {
         SchemesModel schemesModel = schemesModelFromJson(response.body);
-        //print(schemesModel.items[1].title);
-        return schemesModel;
+        print(schemesModel.items[1].title);
+        return schemesModel.items;
       }
     } catch (e) {
       print(e.toString());
