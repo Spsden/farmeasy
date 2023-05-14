@@ -1,16 +1,16 @@
-# farmeasy
+# FarmEasy
 
-A new Flutter project.
 
-## Getting Started
+A simple native android Notes App written using Kotlin.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p align="center">
+   <img width="400" alt="Crop description" src="https://github.com/Spsden/farmeasy/blob/main/snaps/crop_desc.jpg"> 
+   <img width="400" alt="Crop recommendation" src="https://github.com/Spsden/farmeasy/blob/main/snaps/crop_rec.jpg"> 
+   <img width="400" alt="Crop search" src="https://github.com/Spsden/farmeasy/blob/main/snaps/crop_search.jpg"> 
+   <img width="400" alt="Crop list" src="https://github.com/Spsden/farmeasy/blob/main/snaps/croplist.jpg"> 
+   <img width="400" alt="Weather1" src="https://github.com/Spsden/farmeasy/blob/main/snaps/weather1.jpg"> 
+   <img width="400" alt="Weather2" src="https://github.com/Spsden/farmeasy/blob/main/snaps/weather2.jpg"> 
+</p>
