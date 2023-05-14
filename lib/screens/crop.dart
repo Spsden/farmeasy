@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:farmeasy/fetchers/crops_data_model.dart';
-
-
 import 'package:flutter/material.dart';
 
 class CropDetailsPage extends StatelessWidget {
@@ -70,7 +68,6 @@ class CropDetailsPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-
                       color: Colors.white,
                     ),
                   ),
