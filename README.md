@@ -1,9 +1,6 @@
 # FarmEasy
 
-
-A simple native android Notes App written using Kotlin.
-
-
+Farmeasy is an app made for a college project that aims to help farmers.
 
 
 <p align="center">
