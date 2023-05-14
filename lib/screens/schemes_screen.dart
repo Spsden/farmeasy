@@ -10,6 +10,20 @@ class SchemesScreen extends StatefulWidget {
 class _SchemesScreenState extends State<SchemesScreen> {
   @override
   Widget build(BuildContext context) {
-    return  Placeholder();
+    return  Material(
+      color: Colors.black,
+      child: ListView(
+        children: const [
+        Text(
+        "Government Policies",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.white),
+      ),
+        ]
+      ),
+    );
   }
 }

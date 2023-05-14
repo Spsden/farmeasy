@@ -1,6 +1,7 @@
 import 'package:farmeasy/custom/drawer.dart';
 import 'package:farmeasy/screens/crop_screen.dart';
 import 'package:farmeasy/screens/crops_list.dart';
+import 'package:farmeasy/screens/schemes_screen.dart';
 import 'package:farmeasy/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:farmeasy/custom/drawer.dart' as drawer;
@@ -20,7 +21,7 @@ class _HomeState extends State<Home> {
   late PersistentTabController _persistentTabController;
 
   List<Widget> _buildScreens() =>
-      [HomePage(), CropsListView(), Placeholder(), WeatherScreen()];
+      [HomePage(), CropsListView(), SchemesScreen(), WeatherScreen()];
 
   List<PersistentBottomNavBarItem> _navBarsItems() => [
         PersistentBottomNavBarItem(
