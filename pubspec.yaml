@@ -43,6 +43,7 @@ dependencies:
   cached_network_image: ^3.2.3
   lottie: ^2.3.2
   hexcolor: ^3.0.1
+  searchfield: ^0.8.0
 
 dev_dependencies:
   flutter_test:

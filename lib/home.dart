@@ -1,5 +1,5 @@
 import 'package:farmeasy/custom/drawer.dart';
-import 'package:farmeasy/screens/crop_screen.dart';
+import 'package:farmeasy/screens/crop_search_results.dart';
 import 'package:farmeasy/screens/crops_list.dart';
 import 'package:farmeasy/screens/schemes_screen.dart';
 import 'package:farmeasy/screens/home_screen.dart';
@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
           routeAndNavigatorSettings: RouteAndNavigatorSettings(
             initialRoute: "/",
             routes: {
-              "/first": (final context) => const CropScreen(),
+              "/first": (final context) => const CropSearchScreen(),
               "/second": (final context) => const WeatherScreen(),
             },
           ),
@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
           routeAndNavigatorSettings: RouteAndNavigatorSettings(
             initialRoute: "/",
             routes: {
-              "/first": (final context) => const CropScreen(),
+              "/first": (final context) => const CropSearchScreen(),
               "/second": (final context) => const WeatherScreen(),
             },
           ),
@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
           routeAndNavigatorSettings: RouteAndNavigatorSettings(
             initialRoute: "/",
             routes: {
-              "/first": (final context) => const CropScreen(),
+              "/first": (final context) =>  CropSearchScreen(),
               "/second": (final context) => const WeatherScreen(),
             },
           ),
