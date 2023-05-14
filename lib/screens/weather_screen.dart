@@ -82,18 +82,18 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: DataSources.getForecast('Delhi', 7),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        if (snapshot.hasData) {
-          ForeCast foreCast = snapshot.data;
-          String forecastCondition =
-              foreCast.current?.condition?.text.toString() ??
-                  'assets/cloud.json';
-          // print(weatherAnimation['Sunny']);
-          return Material(
-            color: Colors.black,
-            child: ListView(
+    return Material(
+      color: Colors.black,
+      child: FutureBuilder(
+        future: DataSources.getForecast('Delhi', 7),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.hasData) {
+            ForeCast foreCast = snapshot.data;
+            String forecastCondition =
+                foreCast.current?.condition?.text.toString() ??
+                    'assets/cloud.json';
+            // print(weatherAnimation['Sunny']);
+            return ListView(
               padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
               physics: const BouncingScrollPhysics(),
               children: [
@@ -332,17 +332,17 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   )
                 ])
               ],
-            ),
-          );
-        }
+            );
+          }
 
-        if (snapshot.hasError) {
-          return const Placeholder();
-        } else {
-          return const SizedBox(
-              width: 200, height: 200, child: CircularProgressIndicator());
-        }
-      },
+          if (snapshot.hasError) {
+            return const Placeholder();
+          } else {
+            return const SizedBox(
+                width: 200, height: 200, child: CircularProgressIndicator());
+          }
+        },
+      ),
     );
   }
 

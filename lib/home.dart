@@ -21,7 +21,9 @@ class _HomeState extends State<Home> {
   late PersistentTabController _persistentTabController;
 
   List<Widget> _buildScreens() =>
+
       [HomePage(), CropsListView(), SchemesScreen(), WeatherScreen()];
+
 
   List<PersistentBottomNavBarItem> _navBarsItems() => [
         PersistentBottomNavBarItem(

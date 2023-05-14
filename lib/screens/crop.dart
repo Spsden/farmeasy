@@ -11,8 +11,10 @@ class CropDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.black,
 
       child: CustomScrollView(
+
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
@@ -50,54 +52,79 @@ class CropDetailsPage extends StatelessWidget {
           ),
           // const SizedBox(
           //   height: 25,
-          // ),
+          //
+
+
           SliverFillRemaining(
             child: Container(
               padding:
               const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    "Description: ${ cropsData.description ?? 'NA'} ",
-                    style: const TextStyle(
+                  const Text(
+                    "Description",
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    cropsData.description ?? 'NA' ,
+                    style: const TextStyle(
+                      fontSize: 17,
+
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  Text(
-                    "Scientific Name:  ${ cropsData.scientificName.toString()}",
-                    style: const TextStyle(
+                  const Text(
+                    "Scientific Name",
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                     cropsData.scientificName.toString(),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  ),
+                 const SizedBox(
+                   height: 20,
+                 ),
+
+
+                 const Text(
+                    'Total Ways of Harvesting',
+                    style:  TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    cropsData.harvestsCount.toString(),
+                    style: const TextStyle(
+                      fontSize: 15,
+
+                      color: Colors.white,
                     ),
                   ),
 
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    'Total Ways of Harvesting: ${cropsData.harvestsCount.toString()}',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
 
 
 
-                  // Text("beeep"),
-                  // Text("beeep"),
-                  // Text("beeep"),
-                  // Text("beeep"),
 
 
 
