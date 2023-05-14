@@ -14,43 +14,62 @@ class CropSearchResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      FutureBuilder(
-        future: DataSources.allResults("andhra"),
-        builder: (context, snapshot) {
-          print(snapshot.data);
-          //  print("yes has daya");
-          if (snapshot.hasData) {
-            // print("yes has daya");
-            return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: ((context, index) {
-                  return ListTile(
-                    onTap: () {
-                      // Navigator.push(context, MaterialPageRoute(
-                      //     builder: (context) => CropDetailsPage()));
-                    },
-                    leading: CircleAvatar(
-                        child: Image.network(
-                            snapshot.data[index].field5.toString())),
-                    hoverColor: Colors.white12,
-                    title: Text(snapshot.data[index].crop.toString()),
-                    subtitle: Text(snapshot.data[index].variety.toString()),
-                  );
-                }));
-          }
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Text('Crop recommendations for $searchQuery are:',style: TextStyle(fontSize: 30,color: Colors.white),),
+        ),
+        const SizedBox(height: 30,),
+        FutureBuilder(
+          future: DataSources.allResults(searchQuery),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Expanded(
+                child: ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: ((context, index) {
+                      return ListTile(
+                        onTap: () {
+                          // Navigator.push(context, MaterialPageRoute(
+                          //     builder: (context) => CropDetailsPage()));
+                        },
+                        leading: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                snapshot.data[index].field5.toString())),
+                        hoverColor: Colors.white12,
+                        title: Text(
+                          snapshot.data[index].crop.toString(),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        subtitle: Text(
+                          snapshot.data[index].variety.toString(),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      );
+                    })),
+              );
+            }
 
-          if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          } else {
-            //print("yes has daya");
-            return const CircularProgressIndicator();
-          }
-        },
-      );
+            if (snapshot.hasError) {
+              return Text(snapshot.error.toString(),style: const TextStyle(color: Colors.white));
+            } else if (snapshot.data == null){
+              return const Text("No recommendations available",style: TextStyle(color: Colors.white),);
+            }
 
+            else {
+              //print("yes has daya");
+              return const CircularProgressIndicator();
+            }
+          },
+        ),
+      ],
+    );
 
-    return Text(searchQuery, style: TextStyle(color: Colors.white),);
+    return Text(
+      searchQuery,
+      style: TextStyle(color: Colors.white),
+    );
 
     ListView(
       children: [
@@ -63,9 +82,9 @@ class CropSearchResults extends StatelessWidget {
             //your selected crops
             Container(
                 margin:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 padding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
                 height: 180,
                 decoration: BoxDecoration(
                     color: Colors.green,
@@ -190,9 +209,9 @@ class CropSearchResults extends StatelessWidget {
               },
               child: Container(
                 margin:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 padding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                 height: 80,
                 decoration: BoxDecoration(
                     color: Colors.lightGreen,

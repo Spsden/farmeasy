@@ -33,11 +33,32 @@ class DataSources {
 
         List<CropData> newList = [];
         for (var element in list) {
-          if (element.recommendedZone.toLowerCase().contains("andhra")) {
-            print(element);
-            newList.add(element);
+          final areaList = element.recommendedZone
+              .split(',')
+              .map((e) => e.toLowerCase().trim()).toList();
+
+         // print(areaList);
+
+          String x = query;
+          bool exists = areaList.any((string) => string.toLowerCase().contains(x.toLowerCase()));
+          if (exists) {
+           newList.add(element);
           }
+          // else {
+          //   print('The string "$x" does not exist in the list.');
+          // }
+
+
+          // bool exists = areaList.any((element) => areaList.contains(query));
+          // print(exists);
+          // if (exists) {
+          //   print("yes");
+          // } else {
+          //   print("no");
+          // }
+
         }
+      //  print(newList);
 
         return newList;
       } else {

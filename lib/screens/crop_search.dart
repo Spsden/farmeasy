@@ -1,3 +1,4 @@
+import 'package:farmeasy/models/helpers.dart';
 import 'package:farmeasy/screens/crop.dart';
 import 'package:farmeasy/screens/crop_search_results.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _CropSearchScreenState extends State<CropSearchScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
           child: SearchField(
             searchStyle: const TextStyle(color: Colors.white),
-            suggestions: ["Paddy", "Wheat", "Maize"]
+            suggestions: states
                 .map((e) => SearchFieldListItem(e))
                 .toList(),
             suggestionStyle: const TextStyle(
