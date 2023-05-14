@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
   late PersistentTabController _persistentTabController;
 
   List<Widget> _buildScreens() =>
-      [HomePage(), CropsListView(), Placeholder(), WeatherScreen()];
+      [const HomePage(), CropsListView(), const Placeholder(), const WeatherScreen()];
 
   List<PersistentBottomNavBarItem> _navBarsItems() => [
         PersistentBottomNavBarItem(
