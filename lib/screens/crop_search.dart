@@ -27,9 +27,18 @@ class _CropSearchScreenState extends State<CropSearchScreen> {
             suggestions: states
                 .map((e) => SearchFieldListItem(e))
                 .toList(),
+
             suggestionStyle: const TextStyle(
               color: Colors.black,
             ),
+            validator: (x) {
+              if (!states.contains(x) || x!.isEmpty) {
+                return 'Please Enter a valid State';
+              }
+              return null;
+            },
+            maxSuggestionsInViewPort: 3,
+            itemHeight: 50,
             suggestionItemDecoration: BoxDecoration(
               color: Theme.of(context).cardColor,
             ),
@@ -52,7 +61,11 @@ class _CropSearchScreenState extends State<CropSearchScreen> {
               border: const OutlineInputBorder(),
             ),
           ),
-        )
+        ),
+        
+       // Text('Your Location : Madhya Pradesh',style: TextStyle(color: Colors.white,fontSize: 30),),
+
+        const Expanded(child: CropSearchResults(searchQuery: "Madhya Pradesh"))
 
 
       ],

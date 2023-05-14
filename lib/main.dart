@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(
         useMaterial3: true,
         cardColor: HexColor('#0D47A1').withOpacity(0.4),
+        textTheme: TextTheme(headline1: TextStyle(color: Colors.white))
 
 
 

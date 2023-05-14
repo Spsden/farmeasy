@@ -339,7 +339,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
             return const Placeholder();
           } else {
             return const SizedBox(
-                width: 200, height: 200, child: CircularProgressIndicator());
+                 child: CircularProgressIndicator());
           }
         },
       ),
