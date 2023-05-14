@@ -30,15 +30,15 @@ class _CropsListViewState extends State<CropsListView> {
   Future<void> _fetchPage(int pageKey) async {
     try {
       final newItems = await DataSources.fetchCrops(pageKey.toString());
-      print(newItems.length);
+     // print(newItems.length);
       final isLastPage = newItems.length < 20;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems);
-        print("thhe end");
+       // print("thhe end");
       } else {
         int nextPageKey = pageKey + 1;
-        print(nextPageKey);
-        print(nextPageKey.runtimeType);
+       // print(nextPageKey);
+       // print(nextPageKey.runtimeType);
         _pagingController.appendPage(newItems, nextPageKey);
       }
     } catch (error) {
