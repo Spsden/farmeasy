@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:farmeasy/fetchers/DataModels/fore_cast/current.dart';
 import 'package:farmeasy/fetchers/DataModels/fore_cast/forecastday.dart';
 import 'package:farmeasy/fetchers/DataModels/fore_cast/location.dart';
 import 'package:farmeasy/fetchers/crops_data_model.dart';
+import 'package:farmeasy/fetchers/schemes_data_model.dart';
 import 'package:farmeasy/models/crop_model.dart';
+import 'package:farmeasy/models/helpers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:farmeasy/fetchers/DataModels/fore_cast/forecast.dart'
@@ -40,8 +43,21 @@ class DataSources {
 
   static Future fetchSchemes(String pageNum) async {
     final headers = {"occupation": "1"};
-    final Response response = await post(Uri.parse(
-        'https://keyword.vikaspedia.in/keyword/schemes/search?lgn=en&pageno=$pageNum&size=9'));
+    print("taoooed");
+    try {
+      final Response response = await HttpOverrides.runWithHttpOverrides(
+          () => post(Uri.parse(
+              'https://keyword.vikaspedia.in/keyword/schemes/search?lgn=en&pageno=1&size=9')),
+          IgnoreCertificateErrorOverrides());
+
+      if (response.statusCode == 200) {
+        SchemesModel schemesModel = schemesModelFromJson(response.body);
+        //print(schemesModel.items[1].title);
+        return schemesModel;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   static Future fetchCrops(String pageNum) async {
