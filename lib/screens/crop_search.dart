@@ -37,10 +37,12 @@ class _CropSearchScreenState extends State<CropSearchScreen> {
             textInputAction: TextInputAction.next,
             hint: 'SearchField Example 2',
             onSubmit: (query) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CropSearchResults(searchQuery: query)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          CropSearchResults(searchQuery: query)));
             },
-
-
             searchInputDecoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -51,37 +53,7 @@ class _CropSearchScreenState extends State<CropSearchScreen> {
           ),
         )
 
-        // FutureBuilder(
-        //   future: DataSources.allResults(),
-        //   builder: (context, snapshot) {
-        //     //print(snapshot.data);
-        //     //  print("yes has daya");
-        //     if (snapshot.hasData) {
-        //       // print("yes has daya");
-        //       return ListView.builder(
-        //           itemCount: snapshot.data.length,
-        //           itemBuilder: ((context, index) {
-        //             return ListTile(
-        //               onTap: () {
-        //                 Navigator.push(context, MaterialPageRoute(builder: (context) => CropDetailsPage()));
-        //               },
-        //               leading: CircleAvatar(
-        //                   child: Image.network(snapshot.data[index].field5.toString())),
-        //               hoverColor: Colors.white12,
-        //               title: Text(snapshot.data[index].crop.toString()),
-        //               subtitle: Text(snapshot.data[index].variety.toString()),
-        //             );
-        //           }));
-        //     }
-        //
-        //     if (snapshot.hasError) {
-        //       return Text(snapshot.error.toString());
-        //     } else {
-        //       //print("yes has daya");
-        //       return const CircularProgressIndicator();
-        //     }
-        //   },
-        // )
+
       ],
     ));
   }

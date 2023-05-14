@@ -81,7 +81,8 @@ class _HomePageState extends State<HomePage> {
                 child: Lottie.asset('assets/sunny.json')),
             ElevatedButton(
                 onPressed: () {
-                  DataSources.fetchSchemes("1");
+                 // DataSources.fetchSchemes("1");
+
                 },
                 child: Icon(Icons.abc))
 

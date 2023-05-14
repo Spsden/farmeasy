@@ -75,30 +75,13 @@ class _CropsListViewState extends State<CropsListView> {
             body: TabBarView(
               children: [
                 PagedGridView(
+                  physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(10),
                   pagingController: _pagingController,
                   builderDelegate: PagedChildBuilderDelegate<CropsData>(
                       itemBuilder: (context, item, index) =>
                           CropCard(cropsData: item)
 
-                      // ListTile(
-                      //   onTap: () {
-                      //     // Navigator.push(context, MaterialPageRoute(builder: (context) => CropDetailsPage()));
-                      //   },
-                      //   leading: CircleAvatar(
-                      //     child: CachedNetworkImage(
-                      //       filterQuality: FilterQuality.medium,
-                      //       imageUrl: item.thumbnailUrl ??
-                      //           "https://i.imgur.com/3jcYAZR.jpg",
-                      //       progressIndicatorBuilder:
-                      //           (context, url, downloadProgress) =>
-                      //               CircularProgressIndicator(
-                      //                   value: downloadProgress.progress),
-                      //       errorWidget: (context, url, error) => Icon(Icons.error),
-                      //     ),
-                      //   ),
-                      //   title: Text(item.name ?? "na"),
-                      // )
 
                       ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -106,7 +89,7 @@ class _CropsListViewState extends State<CropsListView> {
                       crossAxisCount: 2,
                       mainAxisSpacing: 16),
                 ),
-                CropSearchScreen()
+                const CropSearchScreen()
               ],
             ),
           ),
