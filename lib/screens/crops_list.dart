@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:farmeasy/custom/crop_card.dart';
 import 'package:farmeasy/fetchers/crops_data_model.dart';
 import 'package:farmeasy/fetchers/fetchers.dart';
+import 'package:farmeasy/screens/crop_search.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -23,6 +24,8 @@ class _CropsListViewState extends State<CropsListView> {
     });
     super.initState();
   }
+
+  // TabController tabController = TabController(length: length, vsync: vsync)
 
   Future<void> _fetchPage(int pageKey) async {
     try {
@@ -49,36 +52,64 @@ class _CropsListViewState extends State<CropsListView> {
       // package takes care of that. If you want to customize them, use the
       // [PagedChildBuilderDelegate] properties.
       Material(
-        color: Colors.black,
-        
-        child: PagedGridView(
-          padding: const EdgeInsets.all(10),
-          pagingController: _pagingController,
-          builderDelegate: PagedChildBuilderDelegate<CropsData>(
-              itemBuilder: (context, item, index) => CropCard(cropsData: item)
+        child: DefaultTabController(
+          length: 2,
 
-              // ListTile(
-              //   onTap: () {
-              //     // Navigator.push(context, MaterialPageRoute(builder: (context) => CropDetailsPage()));
-              //   },
-              //   leading: CircleAvatar(
-              //     child: CachedNetworkImage(
-              //       filterQuality: FilterQuality.medium,
-              //       imageUrl: item.thumbnailUrl ??
-              //           "https://i.imgur.com/3jcYAZR.jpg",
-              //       progressIndicatorBuilder:
-              //           (context, url, downloadProgress) =>
-              //               CircularProgressIndicator(
-              //                   value: downloadProgress.progress),
-              //       errorWidget: (context, url, error) => Icon(Icons.error),
-              //     ),
-              //   ),
-              //   title: Text(item.name ?? "na"),
-              // )
+          child: Scaffold(
+            backgroundColor: Colors.black,
+            appBar: AppBar(
+              toolbarHeight: 5,
+              backgroundColor: Theme.of(context).cardColor,
+              bottom: const TabBar(
+                indicatorWeight: 5,
+                  indicatorSize:  TabBarIndicatorSize.label,
+                  tabs: [
+                Tab(
+                  icon: Icon(Icons.grass_rounded,color: Colors.white,),
+                ),
+                Tab(
+                  icon: Icon(Icons.search,color: Colors.white,),
+                )
+              ]),
+            ),
+            body: TabBarView(
+              children: [
+                PagedGridView(
+                  padding: const EdgeInsets.all(10),
+                  pagingController: _pagingController,
+                  builderDelegate: PagedChildBuilderDelegate<CropsData>(
+                      itemBuilder: (context, item, index) =>
+                          CropCard(cropsData: item)
 
-              ),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 9 / 12, crossAxisCount: 2, mainAxisSpacing: 16),
+                      // ListTile(
+                      //   onTap: () {
+                      //     // Navigator.push(context, MaterialPageRoute(builder: (context) => CropDetailsPage()));
+                      //   },
+                      //   leading: CircleAvatar(
+                      //     child: CachedNetworkImage(
+                      //       filterQuality: FilterQuality.medium,
+                      //       imageUrl: item.thumbnailUrl ??
+                      //           "https://i.imgur.com/3jcYAZR.jpg",
+                      //       progressIndicatorBuilder:
+                      //           (context, url, downloadProgress) =>
+                      //               CircularProgressIndicator(
+                      //                   value: downloadProgress.progress),
+                      //       errorWidget: (context, url, error) => Icon(Icons.error),
+                      //     ),
+                      //   ),
+                      //   title: Text(item.name ?? "na"),
+                      // )
+
+                      ),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 9 / 12,
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 16),
+                ),
+                CropSearchScreen()
+              ],
+            ),
+          ),
         ),
       );
 
