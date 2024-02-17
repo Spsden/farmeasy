@@ -58,7 +58,7 @@ class DataSources {
           // }
 
         }
-      //  print(newList);
+        print(newList);
 
         return newList;
       } else {
@@ -94,10 +94,22 @@ class DataSources {
       final Response response = await get(Uri.parse(
           'https://www.growstuff.org/crops?page=$pageNum&format=json'));
       if (response.statusCode == 200) {
-        // print(response.body);
 
-        List<CropsData> list = cropsDataFromMap(response.body);
+        print("hiiiiiii");
+
+
+
+       // print(response.body.toString() + "hello world ");
+     print(response.body.runtimeType);
+     var allQueryList = jsonDecode(response.body);
+     print(allQueryList);
+
+
+        List<CropsData> list = cropsDataFromMap(json.encode(allQueryList['query']));
+     //  List<CropsData> list = [];
+        print(list.runtimeType);
         // print(response.body.runtimeType);
+
 
         // list.forEach((element) {print(element.name);});
 
@@ -108,6 +120,7 @@ class DataSources {
         debugPrint("error");
       }
     } catch (e) {
+      print(e.toString());
       rethrow;
     }
   }
