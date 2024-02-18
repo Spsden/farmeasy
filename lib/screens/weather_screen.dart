@@ -2,10 +2,14 @@ import 'dart:collection';
 
 
 import 'package:farmeasy/fetchers/fetchers.dart';
+import 'package:farmeasy/models/weather_models/weather_model/weather_model.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../custom/days_cell.dart';
+import '../custom/hourly_cell.dart';
 import '../models/helpers.dart';
+import '../models/weather_models/weather_model/hour.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -84,12 +88,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
         future: DataSources.getForecast('Delhi', 7),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
+
+            WeatherModel foreCast = snapshot.data;
             // ForeCast foreCast = snapshot.data;
             // print(snapshot.data.toString() + "this is what m taliing about");
            // // print(foreCast.current?.cloud.toString());
-           //  String forecastCondition =
-           //      foreCast.current?.condition?.text.toString() ??
-           //          'assets/cloud.json';
+            String forecastCondition =
+                foreCast.current?.condition?.text.toString() ??
+                    'assets/cloud.json';
            //  print(weatherAnimation['Sunny'].toString());
 
 
@@ -108,232 +114,233 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
-                // Column(
-                //   children: [
-                //     Container(
-                //       margin: const EdgeInsets.symmetric(
-                //           horizontal: 10, vertical: 10),
-                //       padding: const EdgeInsets.symmetric(
-                //           horizontal: 10, vertical: 7),
-                //       height: 180,
-                //       decoration: BoxDecoration(
-                //           color: Theme.of(context).cardColor,
-                //           borderRadius: BorderRadius.circular(8)),
-                //       child: Column(
-                //         children: [
-                //           Row(
-                //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //             children: [
-                //               Row(
-                //                 children: [
-                //                   const Icon(
-                //                     Icons.location_on,
-                //                     color: Colors.white,
-                //                   ),
-                //                   const SizedBox(width: 8),
-                //                   Text(
-                //                     foreCast.location?.name ?? 'NA',
-                //                     style: const TextStyle(
-                //                         fontSize: 20, color: Colors.white),
-                //                   )
-                //                 ],
-                //               ),
-                //               const Icon(Icons.share, color: Colors.white)
-                //             ],
-                //           ),
-                //           const SizedBox(
-                //             height: 12,
-                //           ),
-                //           Row(
-                //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //               children: [
-                //                 SizedBox(
-                //                   width: 120,
-                //                   height: 120,
-                //                   // child: Lottie.asset(
-                //                   //   weatherAnimation[forecastCondition]!,
-                //                   // ),
-                //                 ),
-                //                 Column(
-                //                   children: [
-                //                     Text(
-                //                       '${foreCast.current?.tempC.toString()} °C' ??
-                //                           'NA',
-                //                       style: const TextStyle(
-                //                           fontSize: 35,
-                //                           fontWeight: FontWeight.w900,
-                //                           color: Colors.white),
-                //                     ),
-                //                     Text(
-                //                       foreCast.current?.condition?.text ?? 'NA',
-                //                       style: const TextStyle(
-                //                           fontSize: 20, color: Colors.white),
-                //                     )
-                //                   ],
-                //                 ),
-                //               ])
-                //         ],
-                //       ),
-                //     )
-                //   ],
-                // ),
-                // // const WeatherCard(),
-                // Container(
-                //   margin:
-                //       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                //   padding:
-                //       const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                //   height: 160,
-                //   decoration: BoxDecoration(
-                //       color: Theme.of(context).cardColor,
-                //       borderRadius: BorderRadius.circular(8)),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Column(
-                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         children: [
-                //           dataCell(
-                //               context,
-                //               const Icon(
-                //                 Icons.thermostat,
-                //                 color: Colors.white,
-                //               ),
-                //               'Atm Pressure',
-                //               foreCast.current?.pressureMb.toString() ?? "12 atm"),
-                //           dataCell(
-                //               context,
-                //               const Icon(Icons.wb_sunny_sharp,
-                //                   color: Colors.white),
-                //               ' SunRise',
-                //               foreCast.forecast?[0].astro?.sunrise.toString() ??
-                //                   'NA'),
-                //           dataCell(
-                //               context,
-                //               const Icon(Icons.wind_power, color: Colors.white),
-                //               'Wind Speed',
-                //               foreCast.current!.windKph.toString() ?? 'na')
-                //         ],
-                //       ),
-                //       Column(
-                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         children: [
-                //           dataCell(
-                //               context,
-                //               const Icon(Icons.cloud, color: Colors.white),
-                //               ' Rain',
-                //               foreCast.forecast?[0].day?.dailyChanceOfRain
-                //                       .toString() ??
-                //                   'NA'),
-                //           dataCell(
-                //               context,
-                //               const Icon(Icons.sunny_snowing,
-                //                   color: Colors.white),
-                //               ' Sunset',
-                //               foreCast.forecast?[0].astro?.sunset.toString() ??
-                //                   'NA'),
-                //           dataCell(
-                //               context,
-                //               const Icon(Icons.water_drop, color: Colors.white),
-                //               ' Humidity',
-                //               foreCast.current?.humidity.toString() ?? 'NA')
-                //         ],
-                //       )
-                //     ],
-                //   ),
-                // ),
-                // Column(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //   const Text(
-                //     "   Hourly Forecast",
-                //     style: TextStyle(
-                //         fontSize: 23,
-                //         fontWeight: FontWeight.bold,
-                //         color: Colors.white),
-                //   ),
-                //   Container(
-                //       margin: const EdgeInsets.symmetric(
-                //           horizontal: 10, vertical: 10),
-                //       padding: const EdgeInsets.symmetric(
-                //           horizontal: 5, vertical: 8),
-                //       //  suraj code from here
-                //       height: 130,
-                //       child: ListView.builder(
-                //         itemCount: foreCast.forecast?[0].hour?.length,
-                //         scrollDirection: Axis.horizontal,
-                //         padding: const EdgeInsets.symmetric(horizontal: 10),
-                //         physics: const BouncingScrollPhysics(),
-                //         itemBuilder: (context, index) {
-                //           Hour hour = foreCast.forecast![0].hour![index];
-                //           String wIcon = hour.condition?.text ?? 'Rainy';
-                //
-                //           return Container(
-                //               margin: const EdgeInsets.symmetric(horizontal: 5),
-                //               child: HourlyCell(
-                //                 icon: weatherIcon[wIcon] ??
-                //                     const Icon(Icons.cloudy_snowing,
-                //                         color: Colors.white),
-                //                 temp: hour.tempC.toString(),
-                //                 time: hour.time.toString(),
-                //               ));
-                //         },
-                //       )),
-                //   Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       const Text(
-                //         "   7 Days Forecast",
-                //         textAlign: TextAlign.center,
-                //         style: TextStyle(
-                //             fontSize: 23,
-                //             fontWeight: FontWeight.bold,
-                //             color: Colors.white),
-                //       ),
-                //       Container(
-                //           margin: const EdgeInsets.symmetric(
-                //               horizontal: 10, vertical: 10),
-                //
-                //           //child:listOfDays[0]
-                //
-                //           child: ListView.builder(
-                //             shrinkWrap: true,
-                //             itemCount: foreCast.forecast?.length ?? 10,
-                //             scrollDirection: Axis.vertical,
-                //             padding: const EdgeInsets.symmetric(horizontal: 10),
-                //             physics: const BouncingScrollPhysics(),
-                //             itemBuilder: (context, index) {
-                //               final String date =
-                //                   foreCast.forecast![index].date.toString();
-                //               String day = dayFromDateCalc(date);
-                //
-                //               final String temp = foreCast
-                //                       .forecast![index].day!.avgtempC
-                //                       .toString() ??
-                //                   'NA';
-                //
-                //               String iconType = foreCast
-                //                   .forecast![index].day!.condition!.text
-                //                   .toString();
-                //
-                //               if (!weatherIcon.containsKey(iconType)) {
-                //                 iconType = "Rainy";
-                //               }
-                //
-                //               //List<String> iconTypes = ["Sunny","Partly cloudy","Cloudy","Clear"]
-                //
-                //               return Container(
-                //                   margin:
-                //                       const EdgeInsets.symmetric(vertical: 5),
-                //                   child: DaysCell(
-                //                       day: day, icon: iconType, temp: temp));
-                //             },
-                //           ))
-                //     ],
-                //   )
-                // ])
+                Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 7),
+                      height: 180,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+
+                                    foreCast.location?.name ?? 'NA',
+                                    style: const TextStyle(
+                                        fontSize: 20, color: Colors.white),
+                                  )
+                                ],
+                              ),
+                              const Icon(Icons.share, color: Colors.white)
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                SizedBox(
+                                  width: 120,
+                                  height: 120,
+                                  child: Lottie.asset(
+                                    weatherAnimation[forecastCondition] ?? "https://cdn.weatherapi.com/weather/64x64/day/113.png",
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      '${foreCast.current?.tempC.toString()} °C' ??
+                                          'NA',
+                                      style: const TextStyle(
+                                          fontSize: 35,
+                                          fontWeight: FontWeight.w900,
+                                          color: Colors.white),
+                                    ),
+                                    Text(
+                                      foreCast.current?.condition?.text ?? 'NA',
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.white),
+                                    )
+                                  ],
+                                ),
+                              ])
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                // const WeatherCard(),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  height: 160,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          dataCell(
+                              context,
+                              const Icon(
+                                Icons.thermostat,
+                                color: Colors.white,
+                              ),
+                              'Atm Pressure',
+                              foreCast.current?.pressureMb.toString() ?? "12 atm"),
+                          dataCell(
+                              context,
+                              const Icon(Icons.wb_sunny_sharp,
+                                  color: Colors.white),
+                              ' SunRise',
+                              foreCast.forecast?.forecastday![0].astro?.sunrise.toString() ??
+                                  'NA'),
+                          dataCell(
+                              context,
+                              const Icon(Icons.wind_power, color: Colors.white),
+                              'Wind Speed',
+                              foreCast.current!.windKph.toString() ?? 'na')
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          dataCell(
+                              context,
+                              const Icon(Icons.cloud, color: Colors.white),
+                              ' Rain',
+                              foreCast.forecast?.forecastday![0].day?.dailyChanceOfRain
+                                      .toString() ??
+                                  'NA'),
+                          dataCell(
+                              context,
+                              const Icon(Icons.sunny_snowing,
+                                  color: Colors.white),
+                              ' Sunset',
+                              foreCast.forecast?.forecastday![0].astro?.sunset.toString() ??
+                                  'NA'),
+                          dataCell(
+                              context,
+                              const Icon(Icons.water_drop, color: Colors.white),
+                              ' Humidity',
+                              foreCast.current?.humidity.toString() ?? 'NA')
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                  const Text(
+                    "   Hourly Forecast",
+                    style: TextStyle(
+                        fontSize: 23,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 8),
+                      //  suraj code from here
+                      height: 130,
+                      child: ListView.builder(
+                        itemCount: foreCast.forecast?.forecastday![0].hour?.length,
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          Hour hour = foreCast.forecast!.forecastday![0].hour![index];
+                          String wIcon = hour.condition?.text ?? 'Rainy';
+
+                          return Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 5),
+                              child: HourlyCell(
+                                icon: weatherIcon[wIcon] ??
+                                    const Icon(Icons.cloudy_snowing,
+                                        color: Colors.white),
+                                temp: hour.tempC.toString(),
+                                time: hour.time.toString(),
+                              ));
+                        },
+                      )),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "   7 Days Forecast",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+
+                          //child:listOfDays[0]
+
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: foreCast.forecast?.forecastday?.length ?? 10,
+                            scrollDirection: Axis.vertical,
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              final String date =
+                                  foreCast.forecast!.forecastday![index].date.toString();
+                              String day = dayFromDateCalc(date);
+
+                              final String temp = foreCast
+                                      .forecast!.forecastday![index].day!.avgtempC
+                                      .toString() ??
+                                  'NA';
+
+                              String iconType = foreCast
+                                  .forecast!.forecastday![index].day!.condition!.text
+                                  .toString();
+
+                              if (!weatherIcon.containsKey(iconType)) {
+                                iconType = "Rainy";
+                              }
+
+                              //List<String> iconTypes = ["Sunny","Partly cloudy","Cloudy","Clear"]
+
+                              return Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: DaysCell(
+                                      day: day, icon: iconType, temp: temp));
+                            },
+                          ))
+                    ],
+                  )
+                ])
               ],
             );
           }
