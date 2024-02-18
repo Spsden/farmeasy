@@ -1,23 +1,20 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:farmeasy/fetchers/DataModels/fore_cast/current.dart';
-import 'package:farmeasy/fetchers/DataModels/fore_cast/forecastday.dart';
-import 'package:farmeasy/fetchers/DataModels/fore_cast/location.dart';
+
 import 'package:farmeasy/fetchers/crops_data_model.dart';
 import 'package:farmeasy/fetchers/schemes_data_model.dart';
 import 'package:farmeasy/models/crop_model.dart';
 import 'package:farmeasy/models/helpers.dart';
+import 'package:farmeasy/models/weather_models/weather_model/weather_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
-import 'package:farmeasy/fetchers/DataModels/fore_cast/forecast.dart'
-    as forecast;
-import 'DataModels/fore_cast/fore_cast.dart';
+
 
 String requestAuthority = 'https://cropsdata-rhtgnkkbh-devesh-23.vercel.app';
 
 //String weatherKey = 'b82f0e706c1849c39d5140718230903';
-String weatherKey = '97a7732044754cada9d203310231305';
+String weatherKey = '0301fb55825c4c60814111805241702';
 
 String weatherRequestAuthority = 'https://api.weatherapi.com/v1';
 
@@ -95,19 +92,19 @@ class DataSources {
           'https://www.growstuff.org/crops?page=$pageNum&format=json'));
       if (response.statusCode == 200) {
 
-        print("hiiiiiii");
+       // print("hiiiiiii");
 
 
 
        // print(response.body.toString() + "hello world ");
-     print(response.body.runtimeType);
+     //print(response.body.runtimeType);
      var allQueryList = jsonDecode(response.body);
-     print(allQueryList);
+     //print(allQueryList);
 
 
         List<CropsData> list = cropsDataFromMap(json.encode(allQueryList['query']));
      //  List<CropsData> list = [];
-        print(list.runtimeType);
+      //  print(list.runtimeType);
         // print(response.body.runtimeType);
 
 
@@ -120,7 +117,7 @@ class DataSources {
         debugPrint("error");
       }
     } catch (e) {
-      print(e.toString());
+      //print(e.toString());
       rethrow;
     }
   }
@@ -131,26 +128,46 @@ class DataSources {
     try {
       final Response response = await get(Uri.parse(
           '$weatherRequestAuthority/forecast.json?key=$weatherKey&q=$location&days=7'));
+      //print("he;;p wprd");
       if (response.statusCode == 200) {
-        Map responseJson = jsonDecode(response.body);
-        Location location = Location.fromMap(responseJson['location']);
-        Current current = Current.fromMap(responseJson['current']);
 
-        List rofl = responseJson['forecast']['forecastday'];
 
-        List<Forecastday> lol =
-            List<Forecastday>.from(rofl.map((e) => Forecastday.fromMap(e)));
+        Map<String,dynamic> responseJson = jsonDecode(response.body);
 
-        ForeCast foreCast =
-            ForeCast(current: current, forecast: lol, location: location);
+        print(response.body);
+      //  print(responseJson.toString());
 
-        return foreCast;
+        WeatherModel weatherModel = WeatherModel.fromJson(responseJson);
+     //    Location location = Location.fromMap(responseJson['location']);
+     //    Current current = Current.fromMap(responseJson['current']);
+     //    // print(current.toString());
+     //
+     //    List rofl = responseJson['forecast']['forecastday'];
+     //
+     //   print("rofl is working");
+     // /// print(rofl.toString());
+     //
+     //  rofl.forEach((element) {print(element.toString());});
+     //  print("forecasting");
+     //    List<Forecastday> lol =
+     //        List<Forecastday>.from(rofl.map((e) => Forecastday.fromMap(e)));
+     //
+     //
+     //    print(lol.toString() + "this is lol");
+     //    print("working");
+     //    ForeCast foreCast =
+     //        ForeCast(current: current, forecast: lol, location: location);
+     //
+     //   print(foreCast.current?.lastUpdated.toString());
+
+        return weatherModel;
       }
-    } catch (e) {
+    } catch (e,stacktrace) {
       if (kDebugMode) {
-        print(e.toString());
+        print(stacktrace);
+        print(e);
       }
-      return ForeCast();
+      return WeatherModel();
     }
   }
 }
