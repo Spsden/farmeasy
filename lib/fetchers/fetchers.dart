@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-
 import 'package:farmeasy/fetchers/crops_data_model.dart';
 import 'package:farmeasy/fetchers/schemes_data_model.dart';
 import 'package:farmeasy/models/crop_model.dart';
@@ -9,7 +8,6 @@ import 'package:farmeasy/models/helpers.dart';
 import 'package:farmeasy/models/weather_models/weather_model/weather_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
-
 
 String requestAuthority = 'https://cropsdata-rhtgnkkbh-devesh-23.vercel.app';
 
@@ -32,19 +30,20 @@ class DataSources {
         for (var element in list) {
           final areaList = element.recommendedZone
               .split(',')
-              .map((e) => e.toLowerCase().trim()).toList();
+              .map((e) => e.toLowerCase().trim())
+              .toList();
 
-         // print(areaList);
+          // print(areaList);
 
           String x = query;
-          bool exists = areaList.any((string) => string.toLowerCase().contains(x.toLowerCase()));
+          bool exists = areaList
+              .any((string) => string.toLowerCase().contains(x.toLowerCase()));
           if (exists) {
-           newList.add(element);
+            newList.add(element);
           }
           // else {
           //   print('The string "$x" does not exist in the list.');
           // }
-
 
           // bool exists = areaList.any((element) => areaList.contains(query));
           // print(exists);
@@ -53,7 +52,6 @@ class DataSources {
           // } else {
           //   print("no");
           // }
-
         }
         print(newList);
 
@@ -91,22 +89,18 @@ class DataSources {
       final Response response = await get(Uri.parse(
           'https://www.growstuff.org/crops?page=$pageNum&format=json'));
       if (response.statusCode == 200) {
+        // print("hiiiiiii");
 
-       // print("hiiiiiii");
+        // print(response.body.toString() + "hello world ");
+        //print(response.body.runtimeType);
+        var allQueryList = jsonDecode(response.body);
+        //print(allQueryList);
 
-
-
-       // print(response.body.toString() + "hello world ");
-     //print(response.body.runtimeType);
-     var allQueryList = jsonDecode(response.body);
-     //print(allQueryList);
-
-
-        List<CropsData> list = cropsDataFromMap(json.encode(allQueryList['query']));
-     //  List<CropsData> list = [];
-      //  print(list.runtimeType);
+        List<CropsData> list =
+            cropsDataFromMap(json.encode(allQueryList['query']));
+        //  List<CropsData> list = [];
+        //  print(list.runtimeType);
         // print(response.body.runtimeType);
-
 
         // list.forEach((element) {print(element.name);});
 
@@ -122,6 +116,21 @@ class DataSources {
     }
   }
 
+  static Future<String> getPriceData(String location) async {
+    try {
+      final Response response = await get(Uri.parse(
+          "https://vegetablemarketprice.com/api/dataapi/market/bangalore/daywisedata?date=2024-02-16"));
+
+      if(response.statusCode == 200){
+        return response.body;
+      } else{
+        return "LOL no data received";
+      }
+    } catch (e, stackTrack) {
+      return "Lol no data ";
+    }
+  }
+
   static Future getForecast(String location, int days) async {
     //print(location);
 
@@ -130,39 +139,37 @@ class DataSources {
           '$weatherRequestAuthority/forecast.json?key=$weatherKey&q=$location&days=7'));
       //print("he;;p wprd");
       if (response.statusCode == 200) {
-
-
-        Map<String,dynamic> responseJson = jsonDecode(response.body);
+        Map<String, dynamic> responseJson = jsonDecode(response.body);
 
         print(response.body);
-      //  print(responseJson.toString());
+        //  print(responseJson.toString());
 
         WeatherModel weatherModel = WeatherModel.fromJson(responseJson);
-     //    Location location = Location.fromMap(responseJson['location']);
-     //    Current current = Current.fromMap(responseJson['current']);
-     //    // print(current.toString());
-     //
-     //    List rofl = responseJson['forecast']['forecastday'];
-     //
-     //   print("rofl is working");
-     // /// print(rofl.toString());
-     //
-     //  rofl.forEach((element) {print(element.toString());});
-     //  print("forecasting");
-     //    List<Forecastday> lol =
-     //        List<Forecastday>.from(rofl.map((e) => Forecastday.fromMap(e)));
-     //
-     //
-     //    print(lol.toString() + "this is lol");
-     //    print("working");
-     //    ForeCast foreCast =
-     //        ForeCast(current: current, forecast: lol, location: location);
-     //
-     //   print(foreCast.current?.lastUpdated.toString());
+        //    Location location = Location.fromMap(responseJson['location']);
+        //    Current current = Current.fromMap(responseJson['current']);
+        //    // print(current.toString());
+        //
+        //    List rofl = responseJson['forecast']['forecastday'];
+        //
+        //   print("rofl is working");
+        // /// print(rofl.toString());
+        //
+        //  rofl.forEach((element) {print(element.toString());});
+        //  print("forecasting");
+        //    List<Forecastday> lol =
+        //        List<Forecastday>.from(rofl.map((e) => Forecastday.fromMap(e)));
+        //
+        //
+        //    print(lol.toString() + "this is lol");
+        //    print("working");
+        //    ForeCast foreCast =
+        //        ForeCast(current: current, forecast: lol, location: location);
+        //
+        //   print(foreCast.current?.lastUpdated.toString());
 
         return weatherModel;
       }
-    } catch (e,stacktrace) {
+    } catch (e, stacktrace) {
       if (kDebugMode) {
         print(stacktrace);
         print(e);

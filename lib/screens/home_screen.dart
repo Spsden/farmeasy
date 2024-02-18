@@ -13,11 +13,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
         decoration: const BoxDecoration(color: Colors.black),
-        child: Column(
+        child: ListView(
           children: [
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -84,7 +100,17 @@ class _HomePageState extends State<HomePage> {
                  // DataSources.fetchSchemes("1");
 
                 },
-                child: Icon(Icons.abc))
+                child: Text("PAGE UNDER CONSTRUCTION"))
+
+            ,FutureBuilder(future: DataSources.getPriceData("bang"), builder: (context, snapshot) {
+
+              if(snapshot.hasData){
+                return Text(snapshot.data ?? "LOL no data", style: TextStyle(color: Colors.amber),);
+              } else{
+                return Placeholder();
+              }
+            },)
+
 
             // Container(
             //   margin: const EdgeInsets.sy
